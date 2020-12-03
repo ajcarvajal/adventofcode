@@ -43,13 +43,7 @@ fn part1(input: &Vec<PasswordPolicy>) -> u32 {
     let mut result = 0;
 
     for line in input {
-        let mut count = 0;
-
-        for letter in line.password.chars() {
-            if letter == line.letter {
-                count += 1;
-            }
-        }
+        let count = line.password.matches(line.letter).count() as u32;
         if count >= line.min && count <= line.max {
             result += 1;
         }
