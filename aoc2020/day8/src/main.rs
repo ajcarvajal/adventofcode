@@ -2,9 +2,6 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 
-// struct Computer {
-//     accumulator: i32,
-// }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
 where
@@ -53,16 +50,16 @@ fn part2(input: &Vec<(String, i32)>) -> i32 {
     // TODO: Fix brute force implementation
     for idx in 0..input.len() {
         let (operation, _value) = &input[idx];
-
         if operation == "nop" || operation == "jmp" {
             let mut visited_lines = vec![false; input.len()];
             let mut i = 0_i32; // has to be i32 to add negative offsets for jmp
-            let mut runs = 0;
+            let mut is_solution = true;
             let mut accumulator = 0;
 
-            while (i as usize) < input.len() && runs < 10 {
+            while (i as usize) < input.len() {
                 if visited_lines[i as usize] {
-                    runs += 1;
+                    is_solution = false;
+                    break;
                 }
                 visited_lines[i as usize] = true;
                 let (op, val) = &input[i as usize];
@@ -73,7 +70,7 @@ fn part2(input: &Vec<(String, i32)>) -> i32 {
                 }
                 i += 1;
             }
-            if runs == 0 { return accumulator; }
+            if is_solution { return accumulator; }
         }
     }
     -1
