@@ -44,14 +44,16 @@ fn run(input: &Vec<String>) {
             max = left_row * 8.0 + left_col;
         }
     }
+
     println!("Part 1: {}", max);
 
-    for row in 0..seats.len() {
-        for col in 0..seats[0].len() {
-            if seats[row][col] == ' ' {
-                if row > 10 && row < 110 {
+    for row in 2..seats.len() - 2{
+        for col in 2..seats[0].len() - 2 {
+            match seats[row][col-2..=col] {
+                ['x', ' ', 'x'] => { 
                     println!("Part 2: Empty seat at {},{}", row, col);
-                }
+                },
+                _ => {},
             }
         }
     }
