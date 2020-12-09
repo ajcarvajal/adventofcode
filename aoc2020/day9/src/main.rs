@@ -29,12 +29,7 @@ fn part1(input: &Vec<i64>) -> i64 {
     for i in 26..input.len() {
         let mut found = false;
         for j in 0..i {
-            let complement = match i64::try_from(input[i] - input[j]) {
-                Ok(n) => n,
-                Err(_) => i64::try_from(input[j] - input[i]).unwrap(),
-            };
-
-            if s.contains(&complement) {
+            if s.contains(&(input[i] - input[j])) {
                 found = true;
                 break;
             }
@@ -69,7 +64,6 @@ fn part2(input: &Vec<i64>, target: i64) -> i64 {
 
 fn main() {
     let input = get_input();
-    // println!("{:#?}", input);
     let target = part1(&input);
     println!("Part1: {}", target);
     println!("Part2: {}", part2(&input, target));
