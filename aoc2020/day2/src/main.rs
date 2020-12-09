@@ -59,8 +59,7 @@ fn part2(input: &Vec<PasswordPolicy>) -> u32 {
         let idx2 = usize::try_from(line.max - 1).unwrap_or(0);
 
         let password: Vec<char> = line.password.chars().collect();
-        if (password[idx1] == line.letter)
-            ^ (password[idx2] == line.letter)
+        if (password[idx1] == line.letter) ^ (password[idx2] == line.letter)
         {
             result += 1;
         }
